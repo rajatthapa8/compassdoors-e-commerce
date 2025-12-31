@@ -6,7 +6,7 @@ import './index.css'
 export async function Header() {
   const header = await getCachedGlobal('header', 1)()
   const settings = await getCachedGlobal('site-setting', 1)()
-  console.log(header, 'header in header component')
+
   return <HeaderClient header={header} setting={settings} />
 }
 

@@ -27,8 +27,8 @@ export function HeaderClient({ header, setting }: Props) {
   const pathname = usePathname()
 
   return (
-    <div className="relative z-20">
-      <nav className="flex items-center md:items-end justify-between container pt-2">
+    <div className="relative z-20 bg-[#04143E]">
+      <nav className="flex items-center md:items-end justify-between container pt-2 pl-0 pr-0">
         <div className="block flex-none md:hidden">
           <Suspense fallback={null}>
             <MobileMenu menu={menu} />

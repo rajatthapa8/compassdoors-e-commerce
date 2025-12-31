@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
+import { homeStaticData } from '@/endpoints/seed/home-static'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
-import { homeStaticData } from '@/endpoints/seed/home-static'
-import React from 'react'
+import { getPayload } from 'payload'
 
 import type { Page } from '@/payload-types'
 import { notFound } from 'next/navigation'
@@ -88,6 +87,7 @@ const queryPageBySlug = async ({ slug }: { slug: string }) => {
     collection: 'pages',
     draft,
     limit: 1,
+    depth: 2,
     overrideAccess: draft,
     pagination: false,
     where: {

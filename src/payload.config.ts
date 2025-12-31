@@ -21,7 +21,7 @@ import { Pages } from '@/collections/Pages'
 import { Users } from '@/collections/Users'
 import { Footer } from '@/globals/Footer'
 import { Header } from '@/globals/Header'
-import { SiteSetting } from './globals/siteSetting'
+import { SiteSetting } from '@/globals/siteSetting'
 import { plugins } from './plugins'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

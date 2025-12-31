@@ -16,7 +16,7 @@ import { useAuth } from '@/providers/Auth'
 import { MenuIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   menu: Header['navItems']
@@ -48,12 +48,12 @@ export function MobileMenu({ menu }: Props) {
   return (
     <Sheet onOpenChange={setIsOpen} open={isOpen}>
       <SheetTrigger className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:bg-black dark:text-white">
-        <MenuIcon className="h-4" />
+        <MenuIcon className="h-4 text-white" />
       </SheetTrigger>
 
       <SheetContent side="left" className="px-4">
         <SheetHeader className="px-0 pt-4 pb-0">
-          <SheetTitle>My Store</SheetTitle>
+          <SheetTitle>Compass Doors</SheetTitle>
 
           <SheetDescription />
         </SheetHeader>

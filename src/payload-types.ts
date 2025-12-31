@@ -484,6 +484,15 @@ export interface Page {
     | ThreeItemGridBlock
     | BannerBlock
     | FormBlock
+    | ProductsShowCaseBlock
+    | AboutUsBlock
+    | {
+        title: string;
+        limit?: number | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'googleReview';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -875,6 +884,47 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductsShowCaseBlock".
+ */
+export interface ProductsShowCaseBlock {
+  title: string;
+  description?: string | null;
+  products?: (string | Product)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'productsShowCase';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock".
+ */
+export interface AboutUsBlock {
+  heading: string;
+  description: string;
+  bulletPoints: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  media1: string | Media;
+  media2: string | Media;
+  media3: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'AboutUs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "variants".
  */
 export interface Variant {
@@ -1225,6 +1275,16 @@ export interface PagesSelect<T extends boolean = true> {
         threeItemGrid?: T | ThreeItemGridBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        productsShowCase?: T | ProductsShowCaseBlockSelect<T>;
+        AboutUs?: T | AboutUsBlockSelect<T>;
+        googleReview?:
+          | T
+          | {
+              title?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1354,6 +1414,31 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductsShowCaseBlock_select".
+ */
+export interface ProductsShowCaseBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  products?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutUsBlock_select".
+ */
+export interface AboutUsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  bulletPoints?: T;
+  media1?: T;
+  media2?: T;
+  media3?: T;
   id?: T;
   blockName?: T;
 }
@@ -1814,6 +1899,7 @@ export interface Header {
  */
 export interface Footer {
   id: string;
+  logo: string | Media;
   navItems?:
     | {
         link: {
@@ -1829,6 +1915,23 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  footerText: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  phoneNumber: string;
+  email: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1872,6 +1975,7 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
   navItems?:
     | T
     | {
@@ -1886,6 +1990,9 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  footerText?: T;
+  phoneNumber?: T;
+  email?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
