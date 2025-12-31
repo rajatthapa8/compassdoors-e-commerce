@@ -1,4 +1,3 @@
-import { link } from '@/fields/link'
 import {
   FixedToolbarFeature,
   HeadingFeature,
@@ -8,32 +7,27 @@ import {
   OrderedListFeature,
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
-import type { GlobalConfig } from 'payload'
+import { Block } from 'payload'
 
-export const Footer: GlobalConfig = {
-  slug: 'footer',
-  access: {
-    read: () => true,
-  },
+export const AboutUs: Block = {
+  slug: 'AboutUs',
+  interfaceName: 'AboutUsBlock',
   fields: [
     {
-      name: 'logo',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'heading',
+      type: 'text',
+      label: 'Main Heading',
       required: true,
     },
     {
-      name: 'navItems',
-      type: 'array',
-      fields: [
-        link({
-          appearances: false,
-        }),
-      ],
-      maxRows: 6,
+      name: 'description',
+      type: 'text',
+      label: 'Description',
+      required: true,
     },
     {
-      name: 'footerText',
+      name: 'bulletPoints',
+      required: true,
       type: 'richText',
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => {
@@ -48,18 +42,27 @@ export const Footer: GlobalConfig = {
           ]
         },
       }),
-      label: 'Footer Text',
+      label: 'Bullet Points',
+    },
+
+    {
+      name: 'media1',
+      type: 'upload',
+      relationTo: 'media',
       required: true,
     },
     {
-      name: 'phoneNumber',
-      type: 'text',
+      name: 'media2',
+      type: 'upload',
+      relationTo: 'media',
       required: true,
     },
     {
-      name: 'email',
-      type: 'text',
+      name: 'media3',
+      type: 'upload',
+      relationTo: 'media',
       required: true,
     },
   ],
+  labels: { singular: 'About Show Case', plural: 'About Show Cases' },
 }

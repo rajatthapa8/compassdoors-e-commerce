@@ -15,11 +15,11 @@ export function LogoIcon({ logo }: LogoProps) {
       <div>
         {logo ? (
           <Image
-            height={100}
-            width={100}
+            height={120}
+            width={120}
             src={logo.url}
             alt={logo.alt || 'Logo'}
-            className="w-full h-auto"
+            className="w-full h-auto "
           />
         ) : (
           <span className="text-xl font-bold">Logo</span>

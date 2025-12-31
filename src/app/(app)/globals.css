@@ -166,3 +166,45 @@ input,
 button {
   @apply focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
 }
+
+/* Target the RichText output specifically for your AboutUs block */
+.about-us-bullets ul {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to move to the next "line" */
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.about-us-bullets ul li {
+  /* This creates the 2-column effect (3 on left, 3 on right) */
+  flex: 0 0 50%;
+  max-width: 50%;
+
+  /* Standard styling from your template */
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  color: oklch(55.1% 0.027 264.364);
+  font-size: 0.875rem;
+}
+
+/* On mobile, stack them back into 1 column */
+@media (max-width: 640px) {
+  .about-us-bullets ul li {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* The custom bullet circle icon */
+.about-us-bullets ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #dce5e4;
+  border-radius: 50%;
+}

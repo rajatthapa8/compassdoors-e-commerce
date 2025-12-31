@@ -1,67 +1,96 @@
 import type { Footer } from '@/payload-types'
 
-import { FooterMenu } from '@/components/Footer/menu'
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { getCachedGlobal } from '@/utilities/getGlobals'
+import Image from 'next/image'
 import Link from 'next/link'
-import React, { Suspense } from 'react'
-import { LogoIcon } from '@/components/icons/logo'
-
-const { COMPANY_NAME, SITE_NAME } = process.env
+import { SiFacebook, SiWhatsapp } from 'react-icons/si'
+import { RichText } from '../RichText'
+import { FooterMenu } from './menu'
+// type Props = {
+//   footer: string
+//   logo: string
+//   footerText: string
+//   contactInfo: string
+//   phoneNumber: string
+//   email: string
+// }
 
 export async function Footer() {
-  const footer: Footer = await getCachedGlobal('footer', 1)()
-  const menu = footer.navItems || []
-  const currentYear = new Date().getFullYear()
-  const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '')
-  const skeleton = 'w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700'
-
-  const copyrightName = COMPANY_NAME || SITE_NAME || ''
-
+  const footerData: Footer = await getCachedGlobal('footer', 2)()
+  const menu = footerData.navItems || []
+  //console.log(menu)
+  console.log(footerData)
+  //extracting logo's url and alt
+  const { logo } = footerData
+  const logoUrl =
+    typeof logo === 'object' && logo !== null && 'url' in logo ? (logo.url as string) : ''
+  const logoAlt =
+    typeof logo === 'object' && logo !== null && 'alt' in logo
+      ? (logo.alt as string)
+      : 'Compass Doors Logo'
   return (
-    <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="container">
-        <div className="flex w-full flex-col gap-6 border-t border-neutral-200 py-12 text-sm md:flex-row md:gap-12 dark:border-neutral-700">
-          <div>
-            <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
-              <LogoIcon className="w-6" />
-              <span className="sr-only">{SITE_NAME}</span>
-            </Link>
+    <>
+      <footer className="bg-[#04143E] px-6 pt-8 md:px-16 lg:px-36 w-full text-gray-300">
+        <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-500 pb-10 container">
+          <div className="md:max-w-96">
+            <Image alt={logoAlt} className="h-auto" src={logoUrl} height={200} width={200} />
+
+            <RichText data={footerData.footerText} className="mt-6 text-sm text-white p-0" />
+
+            <div className="flex items-center gap-4 mt-3 text-white">
+              <Link href="http://facebook.com/compassdoors" target="_blank">
+                <SiFacebook className="w-6 h-6 hover:text-[#1877F2] transition-colors cursor-pointer" />
+              </Link>
+              <Link href="https://wa.me/9779825961555" target="_blank">
+                <SiWhatsapp
+                  className="w-6 h-6 hover:text-[#25D366] transition-colors cursor-pointer"
+                  target="www.google.com"
+                />
+              </Link>
+              {/* <Link href="" target="_blank">
+                <SiInstagram className="w-6 h-6 hover:text-[#E4405F] transition-colors cursor-pointer" />
+              </Link> */}
+            </div>
           </div>
-          <Suspense
-            fallback={
-              <div className="flex h-[188px] w-[200px] flex-col gap-2">
-                <div className={skeleton} />
-                <div className={skeleton} />
-                <div className={skeleton} />
-                <div className={skeleton} />
-                <div className={skeleton} />
-                <div className={skeleton} />
+          <div className="flex-1 flex items-start md:justify-end gap-20 md:gap-40">
+            <div>
+              <h2 className="font-semibold mb-5">Useful Links</h2>
+              {/* <ul className="text-sm space-y-2">
+                <li>
+                  <a href="#">Home</a>
+                </li>
+                <li>
+                  <a href="#">About us</a>
+                </li>
+                <li>
+                  <a href="#">Contact us</a>
+                </li>
+                <li>
+                  <a href="#">Privacy policy</a>
+                </li>
+              </ul> */}
+              <FooterMenu menu={footerData.navItems} />
+            </div>
+            <div>
+              <h2 className="font-semibold mb-5">Get in touch</h2>
+              <div className="text-sm space-y-2">
+                <Link href={`tel:${footerData.phoneNumber}`} target="_blank">
+                  <p>{footerData.phoneNumber}</p>
+                </Link>
+                <p>{footerData.email}</p>
               </div>
-            }
-          >
-            <FooterMenu menu={menu} />
-          </Suspense>
-          <div className="md:ml-auto flex flex-col gap-4 items-end">
-            <ThemeSelector />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="container mx-auto flex w-full flex-col items-center gap-1 md:flex-row md:gap-0">
-          <p>
-            &copy; {copyrightDate} {copyrightName}
-            {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
+        <div className="flex flex-col md:flex-row justify-between items-center container">
+          <p className="pt-4 text-center text-sm pb-5">
+            Copyright {new Date().getFullYear()} © Compass Doors All Right Reserved.
           </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
-          <p>Designed in Michigan</p>
-          <p className="md:ml-auto">
-            <a className="text-black dark:text-white" href="https://payloadcms.com">
-              Crafted by Payload
-            </a>
-          </p>
+          <Link href="https://www.linkedin.com/in/rajat-thapa-5a0266a1/" target="_blank">
+            <p className='className="pt-4 text-center text-sm pb-5"'>Made with ❤️ by Rajat</p>
+          </Link>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   )
 }
