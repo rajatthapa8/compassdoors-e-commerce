@@ -6,19 +6,11 @@ import Link from 'next/link'
 import { SiFacebook, SiWhatsapp } from 'react-icons/si'
 import { RichText } from '../RichText'
 import { FooterMenu } from './menu'
-// type Props = {
-//   footer: string
-//   logo: string
-//   footerText: string
-//   contactInfo: string
-//   phoneNumber: string
-//   email: string
-// }
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 2)()
   const menu = footerData.navItems || []
-  //console.log(menu)
+  console.log(menu)
   console.log(footerData)
   //extracting logo's url and alt
   const { logo } = footerData
@@ -55,20 +47,7 @@ export async function Footer() {
           <div className="flex-1 flex items-start md:justify-end gap-20 md:gap-40">
             <div>
               <h2 className="font-semibold mb-5">Useful Links</h2>
-              {/* <ul className="text-sm space-y-2">
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">About us</a>
-                </li>
-                <li>
-                  <a href="#">Contact us</a>
-                </li>
-                <li>
-                  <a href="#">Privacy policy</a>
-                </li>
-              </ul> */}
+
               <FooterMenu menu={footerData.navItems} />
             </div>
             <div>
