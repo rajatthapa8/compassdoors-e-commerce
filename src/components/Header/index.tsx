@@ -5,7 +5,7 @@ import './index.css'
 
 export async function Header() {
   const header = await getCachedGlobal('header', 1)()
-  const settings = await getCachedGlobal('site-setting', 1)()
+  const settings = await getCachedGlobal('siteSetting', 1)()
 
   return <HeaderClient header={header} setting={settings} />
 }
