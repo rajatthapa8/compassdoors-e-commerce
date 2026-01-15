@@ -21,7 +21,7 @@ import { Pages } from '@/collections/Pages'
 import { Users } from '@/collections/Users'
 import { Footer } from '@/globals/Footer'
 import { Header } from '@/globals/Header'
-import { siteSetting } from '@/globals/siteSetting'
+import { SiteSetting } from '@/globals/SiteSetting'
 import { plugins } from './plugins'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -79,7 +79,7 @@ export default buildConfig({
   }),
   //email: nodemailerAdapter(),
   endpoints: [],
-  globals: [Header, Footer, siteSetting],
+  globals: [Header, Footer, SiteSetting],
   plugins,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

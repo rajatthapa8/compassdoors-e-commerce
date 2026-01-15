@@ -131,12 +131,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
-    siteSetting: SiteSetting;
+    'site-setting': SiteSetting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    siteSetting: SiteSettingSelect<false> | SiteSettingSelect<true>;
+    'site-setting': SiteSettingSelect<false> | SiteSettingSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1937,7 +1937,7 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "siteSetting".
+ * via the `definition` "site-setting".
  */
 export interface SiteSetting {
   id: string;
@@ -1999,7 +1999,7 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "siteSetting_select".
+ * via the `definition` "site-setting_select".
  */
 export interface SiteSettingSelect<T extends boolean = true> {
   SiteName?: T;
