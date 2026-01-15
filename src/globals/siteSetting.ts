@@ -1,7 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
-export const siteSetting: GlobalConfig = {
-  slug: 'siteSetting',
+export const SiteSetting: GlobalConfig = {
+  slug: 'site-setting',
   access: {
     read: () => true,
   },
