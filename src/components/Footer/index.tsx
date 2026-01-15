@@ -10,8 +10,7 @@ import { FooterMenu } from './menu'
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 2)()
   const menu = footerData.navItems || []
-  console.log(menu)
-  console.log(footerData)
+
   //extracting logo's url and alt
   const { logo } = footerData
   const logoUrl =
