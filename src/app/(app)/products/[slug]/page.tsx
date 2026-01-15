@@ -108,7 +108,7 @@ export default async function ProductPage({ params }: Args) {
 
   const relatedProducts =
     product.relatedProducts?.filter((relatedProduct) => typeof relatedProduct === 'object') ?? []
-  console.log(product)
+
   return (
     <React.Fragment>
       <script
