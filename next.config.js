@@ -26,6 +26,17 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'compassdoors-e-commerce-jmnt-git-main-rajat-thapas-projects.vercel.app',
+        pathname: '/api/media/**',
+      },
     ],
   },
   reactStrictMode: true,
