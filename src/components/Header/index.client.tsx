@@ -49,7 +49,7 @@ export function HeaderClient({ header, setting }: Props) {
                     <CMSLink
                       {...item.link}
                       size={'clear'}
-                      className={cn('relative navLink', {
+                      className={cn('relative navLink  text-white!', {
                         active:
                           item.link.url && item.link.url !== '/'
                             ? pathname.includes(item.link.url)
@@ -63,7 +63,7 @@ export function HeaderClient({ header, setting }: Props) {
             ) : null}
           </div>
 
-          <div className="flex flex-1 justify-end items-center gap-4">
+          <div className="flex flex-1 justify-end items-center gap-4 ">
             <Suspense fallback={<OpenCartButton />}>
               <Cart />
             </Suspense>
