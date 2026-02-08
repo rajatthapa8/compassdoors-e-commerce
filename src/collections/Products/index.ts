@@ -1,7 +1,6 @@
 import { CallToAction } from '@/blocks/CallToAction/config'
 import { Content } from '@/blocks/Content/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { slugField } from 'payload'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { CollectionOverride } from '@payloadcms/plugin-ecommerce/types'
 import {
@@ -18,41 +17,48 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-import { DefaultDocumentIDType, Where } from 'payload'
+import { slugField } from 'payload'
 
 export const ProductsCollection: CollectionOverride = ({ defaultCollection }) => ({
   ...defaultCollection,
+  slug: 'products',
+  access: {
+    read: () => true,
+    create: defaultCollection.access?.create,
+    update: defaultCollection.access?.update,
+    delete: defaultCollection.access?.delete,
+  },
   admin: {
     ...defaultCollection?.admin,
-    defaultColumns: ['title', 'enableVariants', '_status', 'variants.variants'],
+    defaultColumns: ['title', 'slug', 'priceJSON', '_status'],
     livePreview: {
       url: ({ data, req }) =>
         generatePreviewPath({
-          slug: data?.slug,
+          slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'products',
           req,
         }),
     },
     preview: (data, { req }) =>
       generatePreviewPath({
-        slug: data?.slug as string,
+        slug: typeof data?.slug === 'string' ? data.slug : '',
         collection: 'products',
         req,
       }),
     useAsTitle: 'title',
   },
-  defaultPopulate: {
-    ...defaultCollection?.defaultPopulate,
-    title: true,
-    slug: true,
-    variantOptions: true,
-    variants: true,
-    enableVariants: true,
-    gallery: true,
-    priceInUSD: true,
-    inventory: true,
-    meta: true,
-  },
+  // defaultPopulate: {
+  //   ...defaultCollection?.defaultPopulate,
+  //   title: true,
+  //   slug: true,
+  //   variantOptions: true,
+  //   variants: true,
+  //   enableVariants: true,
+  //   gallery: true,
+  //   priceInUSD: true,
+  //   inventory: true,
+  //   meta: true,
+  // },
   fields: [
     { name: 'title', type: 'text', required: true },
     {
@@ -88,47 +94,47 @@ export const ProductsCollection: CollectionOverride = ({ defaultCollection }) =>
                   relationTo: 'media',
                   required: true,
                 },
-                {
-                  name: 'variantOption',
-                  type: 'relationship',
-                  relationTo: 'variantOptions',
-                  admin: {
-                    condition: (data) => {
-                      return data?.enableVariants === true && data?.variantTypes?.length > 0
-                    },
-                  },
-                  filterOptions: ({ data }) => {
-                    if (data?.enableVariants && data?.variantTypes?.length) {
-                      const variantTypeIDs = data.variantTypes.map((item: any) => {
-                        if (typeof item === 'object' && item?.id) {
-                          return item.id
-                        }
-                        return item
-                      }) as DefaultDocumentIDType[]
+                // {
+                //   name: 'variantOption',
+                //   type: 'relationship',
+                //   relationTo: 'variantOptions',
+                //   admin: {
+                //     condition: (data) => {
+                //       return data?.enableVariants === true && data?.variantTypes?.length > 0
+                //     },
+                //   },
+                //   filterOptions: ({ data }) => {
+                //     if (data?.enableVariants && data?.variantTypes?.length) {
+                //       const variantTypeIDs = data.variantTypes.map((item: any) => {
+                //         if (typeof item === 'object' && item?.id) {
+                //           return item.id
+                //         }
+                //         return item
+                //       }) as DefaultDocumentIDType[]
 
-                      if (variantTypeIDs.length === 0)
-                        return {
-                          variantType: {
-                            in: [],
-                          },
-                        }
+                //       if (variantTypeIDs.length === 0)
+                //         return {
+                //           variantType: {
+                //             in: [],
+                //           },
+                //         }
 
-                      const query: Where = {
-                        variantType: {
-                          in: variantTypeIDs,
-                        },
-                      }
+                //       const query: Where = {
+                //         variantType: {
+                //           in: variantTypeIDs,
+                //         },
+                //       }
 
-                      return query
-                    }
+                //       return query
+                //     }
 
-                    return {
-                      variantType: {
-                        in: [],
-                      },
-                    }
-                  },
-                },
+                //     return {
+                //       variantType: {
+                //         in: [],
+                //       },
+                //     }
+                //   },
+                // },
               ],
             },
 

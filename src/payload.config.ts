@@ -1,5 +1,11 @@
+import { Categories } from '@/collections/Categories'
+import { Media } from '@/collections/Media'
+import { Pages } from '@/collections/Pages'
+import { Users } from '@/collections/Users'
+import { Footer } from '@/globals/Footer'
+import { Header } from '@/globals/Header'
+import { SiteSetting } from '@/globals/SiteSetting'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-
 import {
   BoldFeature,
   EXPERIMENTAL_TableFeature,
@@ -14,17 +20,17 @@ import {
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-
-import { Categories } from '@/collections/Categories'
-import { Media } from '@/collections/Media'
-import { Pages } from '@/collections/Pages'
-import { Users } from '@/collections/Users'
-import { Footer } from '@/globals/Footer'
-import { Header } from '@/globals/Header'
-import { SiteSetting } from '@/globals/SiteSetting'
-import { plugins } from './plugins'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+//importing collection override products collection
+//for storing images onto amazon s3 bucket
+import { ecommercePlugin } from '@payloadcms/plugin-ecommerce'
+import { s3Storage } from '@payloadcms/storage-s3'
+// const ProductsStub: CollectionConfig = {
+//   slug: 'products',
+//   fields: [{ name: 'title', type: 'text' }],
+// }
+import { plugins } from '@/plugins'
 
 export default buildConfig({
   admin: {
@@ -51,7 +57,7 @@ export default buildConfig({
         OrderedListFeature(),
         UnorderedListFeature(),
         LinkFeature({
-          enabledCollections: ['pages'],
+          enabledCollections: ['pages', 'products'],
           fields: ({ defaultFields }) => {
             const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
               if ('name' in field && field.name === 'url') return false
@@ -80,17 +86,28 @@ export default buildConfig({
   //email: nodemailerAdapter(),
   endpoints: [],
   globals: [Header, Footer, SiteSetting],
-  plugins,
+  plugins: [
+    ...plugins,
+    //config for s3 bucket
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.S3_REGION,
+        forcePathStyle: false,
+      },
+    }),
+    //product collection
+    ecommercePlugin(),
+  ],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  // Sharp is now an optional dependency -
-  // if you want to resize images, crop, set focal point, etc.
-  // make sure to install it and pass it to the config.
-  // sharp,
-
-  // serverURL: 'http://localhost:3000',
-  // cors: ['http://localhost:3000'],
-  // csrf: ['http://localhost:3000'],
 })

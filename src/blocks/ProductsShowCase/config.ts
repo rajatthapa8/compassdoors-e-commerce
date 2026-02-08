@@ -20,6 +20,7 @@ export const ProductsShowCase: Block = {
       type: 'relationship',
       admin: {
         isSortable: true,
+        condition: () => Boolean(process.env.ENABLE_ECOMMERCE),
       },
       hasMany: true,
       label: 'Products to show',
