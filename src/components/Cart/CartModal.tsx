@@ -174,7 +174,7 @@ export function CartModal() {
                     </div>
                   )}
 
-                  <Button asChild>
+                  <Button asChild variant={'destructive'}>
                     <Link className="w-full" href="/checkout">
                       Proceed to Checkout
                     </Link>
