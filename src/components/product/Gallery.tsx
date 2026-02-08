@@ -1,9 +1,9 @@
 'use client'
 
-import type { Media as MediaType, Product } from '@/payload-types'
+import type { Product } from '@/payload-types'
 
-import { Media } from '@/components/Media'
 import { GridTileImage } from '@/components/Grid/tile'
+import { Media } from '@/components/Media'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 
@@ -30,13 +30,13 @@ export const Gallery: React.FC<Props> = ({ gallery }) => {
 
     if (values && api) {
       const index = gallery.findIndex((item) => {
-        if (!item.variantOption) return false
+        if (!item) return false
 
         let variantID: DefaultDocumentIDType
 
-        if (typeof item.variantOption === 'object') {
-          variantID = item.variantOption.id
-        } else variantID = item.variantOption
+        if (typeof item === 'object') {
+          variantID = item.id || ''
+        } else variantID = item
 
         return Boolean(values.find((value) => value === String(variantID)))
       })

@@ -16,11 +16,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useMemo, useState } from 'react'
 
+import { Button } from '@/components/ui/button'
+import { Product } from '@/payload-types'
 import { DeleteItemButton } from './DeleteItemButton'
 import { EditItemQuantityButton } from './EditItemQuantityButton'
 import { OpenCartButton } from './OpenCart'
-import { Button } from '@/components/ui/button'
-import { Product } from '@/payload-types'
 
 export function CartModal() {
   const { cart } = useCart()
@@ -77,33 +77,33 @@ export function CartModal() {
                       ? product.gallery?.[0]?.image
                       : undefined
 
-                  let image = firstGalleryImage || metaImage
-                  let price = product.priceInUSD
+                  const image = firstGalleryImage || metaImage
+                  const price = product.priceInUSD
 
                   const isVariant = Boolean(variant) && typeof variant === 'object'
 
-                  if (isVariant) {
-                    price = variant?.priceInUSD
+                  // if (isVariant) {
+                  //   price = variant?.priceInUSD
 
-                    const imageVariant = product.gallery?.find((item) => {
-                      if (!item.variantOption) return false
-                      const variantOptionID =
-                        typeof item.variantOption === 'object'
-                          ? item.variantOption.id
-                          : item.variantOption
+                  //   const imageVariant = product.gallery?.find((item) => {
+                  //     if (!item.variantOption) return false
+                  //     const variantOptionID =
+                  //       typeof item.variantOption === 'object'
+                  //         ? item.variantOption.id
+                  //         : item.variantOption
 
-                      const hasMatch = variant?.options?.some((option) => {
-                        if (typeof option === 'object') return option.id === variantOptionID
-                        else return option === variantOptionID
-                      })
+                  //     const hasMatch = variant?.options?.some((option) => {
+                  //       if (typeof option === 'object') return option.id === variantOptionID
+                  //       else return option === variantOptionID
+                  //     })
 
-                      return hasMatch
-                    })
+                  //     return hasMatch
+                  //   })
 
-                    if (imageVariant && typeof imageVariant.image === 'object') {
-                      image = imageVariant.image
-                    }
-                  }
+                  //   if (imageVariant && typeof imageVariant.image === 'object') {
+                  //     image = imageVariant.image
+                  //   }
+                  // }
 
                   return (
                     <li className="flex w-full flex-col" key={i}>
