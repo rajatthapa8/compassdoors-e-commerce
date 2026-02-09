@@ -21,7 +21,7 @@ export const ProductsShowCaseBlock: React.FC<props> = ({ title, description, pro
             <div>
               <Link
                 href="/shop"
-                className="inline-block px-10 py-4 bg-primary text-white font-medium rounded-full hover:bg-black transition-all"
+                className="bg-[#141414] inline-block px-10 py-4  text-white font-medium rounded-full hover:bg-black transition-all"
               >
                 Our Products
               </Link>
@@ -61,7 +61,11 @@ export const ProductsShowCaseBlock: React.FC<props> = ({ title, description, pro
 
                   <div className="text-gray-700 mb-8 leading-relaxed line-clamp-4 text-center">
                     {product.description ? (
-                      <RichText data={product.description} enableGutter={false} />
+                      <RichText
+                        data={product.description}
+                        enableGutter={false}
+                        className="text-gray-700!"
+                      />
                     ) : (
                       product.meta?.description
                     )}
