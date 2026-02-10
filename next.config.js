@@ -32,15 +32,50 @@ const nextConfig = {
         port: '3000',
         pathname: '/api/media/**',
       },
+      // S3 bucket - where images are actually stored
       {
         protocol: 'https',
-        hostname: 'compassdoors-e-commerce-jmnt-git-main-rajat-thapas-projects.vercel.app',
+        hostname: 'compass-doors-images.s3.ap-southeast-2.amazonaws.com',
+        pathname: '/**',
+      },
+      // S3 via AWS path style
+      {
+        protocol: 'https',
+        hostname: 's3.ap-southeast-2.amazonaws.com',
+        pathname: '/compass-doors-images/**',
+      },
+      // Allow ALL Vercel deployment URLs (covers preview + production)
+      {
+        protocol: 'https',
+        hostname: '*.vercel.app',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'https://compassdoors-e-commerce-jmnt.vercel.app',
         pathname: '/api/media/**',
       },
     ],
   },
   reactStrictMode: true,
   redirects,
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Credentials', value: 'true' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT,OPTIONS' },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value:
+              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
+          },
+        ],
+      },
+    ]
+  },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
