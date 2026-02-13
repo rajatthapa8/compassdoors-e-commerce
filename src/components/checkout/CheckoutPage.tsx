@@ -133,7 +133,7 @@ export const CheckoutPage: React.FC = () => {
       <div className="basis-full lg:basis-2/3 flex flex-col gap-8 justify-stretch">
         <h2 className="font-medium text-3xl">Contact</h2>
         {!user && (
-          <div className=" bg-accentrounded-lg p-4 w-full flex items-center">
+          <div className=" bg-accent rounded-lg p-4 w-full flex items-center">
             <div className="prose dark:prose-invert">
               <Button asChild className="no-underline text-inherit" variant="outline">
                 <Link href="/login">Log in</Link>
