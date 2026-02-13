@@ -71,7 +71,7 @@
 }
 
 [data-theme='dark'] {
-  --background: hsla(0, 0%, 4%);
+  --background: #04143e;
   --foreground: hsl(210 40% 98%);
 
   --card: hsl(0, 0%, 8%);

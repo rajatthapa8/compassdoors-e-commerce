@@ -25,6 +25,7 @@ import { cssVariables } from '@/cssVariables'
 import { Address } from '@/payload-types'
 import { useAddresses, useCart, usePayments } from '@payloadcms/plugin-ecommerce/client/react'
 import { toast } from 'sonner'
+import { CheckoutButton } from './Checkoutbutton'
 
 const apiKey = `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
 const stripe = loadStripe(apiKey)
@@ -432,6 +433,13 @@ export const CheckoutPage: React.FC = () => {
           <div className="flex justify-between items-center gap-2">
             <span className="uppercase">Total</span>{' '}
             <Price className="text-3xl font-medium" amount={cart.subtotal || 0} />
+          </div>
+          <div className="flex">
+            <CheckoutButton
+              cartId={cart.id}
+              disabled={(cart.items || '').length === 0}
+              className="bg-[#04143e] px-2 py-4  text-white font-medium rounded-full hover:bg-[#1c2a7a] transition-all w-full"
+            />
           </div>
         </div>
       )}
