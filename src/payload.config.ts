@@ -31,6 +31,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 //   fields: [{ name: 'title', type: 'text' }],
 // }
 import { plugins } from '@/plugins'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 export default buildConfig({
   admin: {
@@ -83,7 +84,21 @@ export default buildConfig({
       ]
     },
   }),
-  //email: nodemailerAdapter(),
+
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.EMAIL_FROM!,
+    defaultFromName: 'Compass Doors Industries',
+    transportOptions: {
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    },
+  }),
+
   endpoints: [],
   globals: [Header, Footer, SiteSetting],
   plugins: [
