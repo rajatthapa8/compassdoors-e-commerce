@@ -15,9 +15,10 @@ import { isDocumentOwner } from '@/access/isDocumentOwner'
 import { ProductsCollection } from '@/collections/Products'
 import { Page, Product } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+const SITE_NAME = process.env.SITE_NAME || 'Compass Doors Industry'
 
 const generateTitle: GenerateTitle<Product | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Compass Doors Industry` : 'Compass Doors Industry'
+  return doc?.title ? `${doc.title} | ${SITE_NAME}` : SITE_NAME
 }
 
 const generateURL: GenerateURL<Product | Page> = ({ doc }) => {

@@ -35,14 +35,7 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 export default buildConfig({
   admin: {
-    components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
-      beforeLogin: ['@/components/BeforeLogin#BeforeLogin'],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ['@/components/BeforeDashboard#BeforeDashboard'],
-    },
+    components: {},
     user: Users.slug,
   },
   collections: [Users, Pages, Categories, Media],
