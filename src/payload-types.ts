@@ -295,7 +295,9 @@ export interface Product {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  priceInUSDEnabled?: boolean | null;
+  /**
+   * Enter price in dollars (e.g., 10.99)
+   */
   priceInUSD?: number | null;
   relatedProducts?: (string | Product)[] | null;
   meta?: {
@@ -433,7 +435,7 @@ export interface Page {
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'outline') | null;
+            appearance?: ('primary' | 'secondary' | 'default' | 'outline') | null;
           };
           id?: string | null;
         }[]
@@ -1705,7 +1707,6 @@ export interface ProductsSelect<T extends boolean = true> {
   enableVariants?: T;
   variantTypes?: T;
   variants?: T;
-  priceInUSDEnabled?: T;
   priceInUSD?: T;
   relatedProducts?: T;
   meta?:

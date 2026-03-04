@@ -21,7 +21,7 @@ export const ProductsShowCaseBlock: React.FC<props> = ({ title, description, pro
             <div>
               <Link
                 href="/shop"
-                className="bg-[#141414] inline-block px-10 py-4  text-white font-medium rounded-full hover:bg-black transition-all"
+                className=" bg-primary text-primary-foreground inline-block px-10 py-4 font-medium rounded-full hover:bg-gray transition-all"
               >
                 Our Products
               </Link>

@@ -57,6 +57,7 @@ export const hero: Field = {
       overrides: {
         maxRows: 2,
       },
+      appearances: ['primary', 'secondary', 'default', 'outline'],
     }),
     {
       name: 'media',

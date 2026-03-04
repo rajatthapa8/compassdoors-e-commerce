@@ -270,19 +270,6 @@ export const CheckoutPage: React.FC = () => {
           </>
         )}
 
-        {!paymentData && (
-          <Button
-            className="self-start"
-            disabled={!canGoToPayment}
-            onClick={(e) => {
-              e.preventDefault()
-              void initiatePaymentIntent('stripe')
-            }}
-          >
-            Go to payment
-          </Button>
-        )}
-
         {!paymentData?.['clientSecret'] && error && (
           <div className="my-8">
             <Message error={error} />

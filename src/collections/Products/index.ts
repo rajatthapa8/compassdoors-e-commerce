@@ -30,7 +30,7 @@ export const ProductsCollection: CollectionOverride = ({ defaultCollection }) =>
   },
   admin: {
     ...defaultCollection?.admin,
-    defaultColumns: ['title', 'slug', 'priceJSON', '_status'],
+    defaultColumns: ['title', 'slug', '_status'],
     livePreview: {
       url: ({ data, req }) =>
         generatePreviewPath({
@@ -47,18 +47,7 @@ export const ProductsCollection: CollectionOverride = ({ defaultCollection }) =>
       }),
     useAsTitle: 'title',
   },
-  // defaultPopulate: {
-  //   ...defaultCollection?.defaultPopulate,
-  //   title: true,
-  //   slug: true,
-  //   variantOptions: true,
-  //   variants: true,
-  //   enableVariants: true,
-  //   gallery: true,
-  //   priceInUSD: true,
-  //   inventory: true,
-  //   meta: true,
-  // },
+
   fields: [
     { name: 'title', type: 'text', required: true },
     {
@@ -148,7 +137,41 @@ export const ProductsCollection: CollectionOverride = ({ defaultCollection }) =>
         },
         {
           fields: [
-            ...defaultCollection.fields,
+            ...defaultCollection.fields.filter(
+              (field) => 'name' in field && field.name !== 'priceInUSD',
+            ),
+            {
+              name: 'priceInUSD',
+              type: 'number',
+              required: false,
+              min: 0,
+              admin: {
+                step: 0.01,
+                description: 'Enter price in dollars (e.g., 10.99)',
+                placeholder: '0.00',
+              },
+              // Add this to format the value for display
+              hooks: {
+                afterRead: [
+                  ({ value }) => {
+                    if (typeof value === 'number') {
+                      // If value is like 1200, convert to 12.00 for display
+                      return value / 100
+                    }
+                    return value
+                  },
+                ],
+                beforeChange: [
+                  ({ value }) => {
+                    if (typeof value === 'number') {
+                      // If user enters 12.00, convert to 1200 for storage
+                      return value * 100
+                    }
+                    return value
+                  },
+                ],
+              },
+            },
             {
               name: 'relatedProducts',
               type: 'relationship',

@@ -25,6 +25,7 @@ export const metadata = {
   },
 }
 
+import Loading from '../loading'
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
@@ -41,7 +42,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Providers>
           <AdminBar />
           <LivePreviewListener />
-          <Suspense>
+          <Suspense fallback={<Loading />}>
             <Header />
             <main>{children}</main>
             <Footer />

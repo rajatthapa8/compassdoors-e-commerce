@@ -44,11 +44,16 @@
   --popover: hsl(0 0% 100%) !important;
   --popover-foreground: hsl(222.2 84% 4.9%) !important;
 
-  --primary: hsl(222.2 47.4% 11.2%) !important;
+  --primary: #03133c !important;
   --primary-foreground: hsl(210 40% 98%) !important;
 
-  --secondary: hsl(210 40% 96.1%) !important;
-  --secondary-foreground: hsl(222.2 47.4% 11.2%) !important;
+  --secondary: #fe6700 !important;
+  --secondary-foreground: hsl(210 40% 98%) !important;
+
+  /*class for hover */
+  --color-primary-hover: #0a2569;
+
+  --color-secondary-hover: #d65600;
 
   --muted: hsl(210 40% 96.1%) !important;
   --muted-foreground: hsl(215.4 16.3% 46.9%) !important;
@@ -80,12 +85,6 @@
 
   --popover: hsl(222.2 84% 4.9%);
   --popover-foreground: hsl(210 40% 98%);
-
-  --primary: hsl(210 40% 98%);
-  --primary-foreground: hsl(0, 0%, 6%);
-
-  --secondary: hsl(217.2 32.6% 17.5%);
-  --secondary-foreground: hsl(210 40% 98%);
 
   --muted: hsl(217.2 32.6% 17.5%);
   --muted-foreground: hsl(215 20.2% 65.1%);
@@ -140,6 +139,20 @@
   h6 {
     font-size: auto;
     font-weight: auto;
+  }
+
+  .bg-primary {
+    transition: background-color 0.2s;
+    &:hover {
+      background-color: var(--color-primary-hover) !important;
+    }
+  }
+
+  .bg-secondary {
+    transition: background-color 0.2s;
+    &:hover {
+      background-color: var(--color-secondary-hover) !important;
+    }
   }
 }
 

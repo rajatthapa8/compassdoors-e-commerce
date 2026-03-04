@@ -19,9 +19,7 @@ export function LogoIcon({ logo }: LogoProps) {
             width={120}
             src={logo.url}
             alt={logo.alt || 'Logo'}
-            className="w-full h-11 "
-            priority
-            quality={100}
+            className="w-full h-auto "
           />
         ) : (
           <span className="text-xl font-bold">Logo</span>
