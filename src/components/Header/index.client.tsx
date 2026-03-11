@@ -48,7 +48,6 @@ export function HeaderClient({ header, setting }: Props) {
                   <li key={item.id}>
                     <CMSLink
                       {...item.link}
-                      size={'clear'}
                       className={cn('relative navLink  text-white!', {
                         active:
                           item.link.url && item.link.url !== '/'
