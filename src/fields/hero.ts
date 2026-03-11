@@ -53,6 +53,30 @@ export const hero: Field = {
       }),
       label: false,
     },
+    // Add rotating phrases field for High Impact hero
+    {
+      name: 'rotatingPhrases',
+      type: 'array',
+      label: 'Rotating Phrases (for High Impact hero)',
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+        description:
+          'Add multiple phrases that will rotate every 2 seconds. E.g., "Easy To Install", "Durable & Long-lasting"',
+      },
+      minRows: 2,
+      maxRows: 10,
+      fields: [
+        {
+          name: 'phrase',
+          type: 'text',
+          required: true,
+          label: 'Phrase',
+          admin: {
+            placeholder: 'e.g., Easy To Install',
+          },
+        },
+      ],
+    },
     linkGroup({
       overrides: {
         maxRows: 2,

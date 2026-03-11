@@ -141,7 +141,7 @@
     font-weight: auto;
   }
 
-  .bg-primary {
+  /* .bg-primary {
     transition: background-color 0.2s;
     &:hover {
       background-color: var(--color-primary-hover) !important;
@@ -153,7 +153,7 @@
     &:hover {
       background-color: var(--color-secondary-hover) !important;
     }
-  }
+  } */
 }
 
 @layer base {

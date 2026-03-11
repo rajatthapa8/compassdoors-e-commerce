@@ -43,7 +43,7 @@ export function HeaderClient({ header, setting }: Props) {
 
           <div className="hidden md:flex flex-1 justify-center">
             {menu.length ? (
-              <ul className="flex items-center gap-6 text-sm">
+              <ul className="flex items-center gap-6 text-md">
                 {menu.map((item) => (
                   <li key={item.id}>
                     <CMSLink

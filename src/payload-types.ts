@@ -421,6 +421,15 @@ export interface Page {
       };
       [k: string]: unknown;
     } | null;
+    /**
+     * Add multiple phrases that will rotate every 2 seconds. E.g., "Easy To Install", "Durable & Long-lasting"
+     */
+    rotatingPhrases?:
+      | {
+          phrase: string;
+          id?: string | null;
+        }[]
+      | null;
     links?:
       | {
           link: {
@@ -1248,6 +1257,12 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         type?: T;
         richText?: T;
+        rotatingPhrases?:
+          | T
+          | {
+              phrase?: T;
+              id?: T;
+            };
         links?:
           | T
           | {
