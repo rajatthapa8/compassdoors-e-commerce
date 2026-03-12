@@ -43,12 +43,12 @@ export function HeaderClient({ header, setting }: Props) {
 
           <div className="hidden md:flex flex-1 justify-center">
             {menu.length ? (
-              <ul className="flex items-center gap-6 text-md">
+              <ul className="flex items-center gap-6">
                 {menu.map((item) => (
                   <li key={item.id}>
                     <CMSLink
                       {...item.link}
-                      className={cn('relative navLink  text-white!', {
+                      className={cn('relative navLink  text-white! text-sm', {
                         active:
                           item.link.url && item.link.url !== '/'
                             ? pathname.includes(item.link.url)

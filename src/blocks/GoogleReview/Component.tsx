@@ -35,7 +35,7 @@ export default async function GoogleReviewBlock({ title, limit }: GoogleReviewBl
 
   return (
     <section className=" bg-white">
-      <div className="h-screen container flex flex-col justify-center items-left">
+      <div className="md:h-screen lg:h-screen container flex flex-col justify-center items-left h-auto mb-10 md:mb-0 lg:mb-0">
         <div className="flex justify-between items-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#2f2f2f] mb-16">{title}</h2>
           <Link href="https://maps.app.goo.gl/ZFkFYcwoMQTLMqrZ6" target="_blank">

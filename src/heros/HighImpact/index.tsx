@@ -18,7 +18,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // Extract phrases from admin data
   const phrases = rotatingPhrases?.map((item) => item.phrase).filter(Boolean) || []
   const hasRotatingPhrases = phrases.length > 0
 
@@ -26,7 +25,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
     setHeaderTheme('dark')
   }, [setHeaderTheme])
 
-  // Rotate text every 2 seconds
   useEffect(() => {
     if (!hasRotatingPhrases || phrases.length <= 1) return
 
@@ -36,8 +34,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       setTimeout(() => {
         setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length)
         setIsAnimating(false)
-      }, 300) // Animation duration
-    }, 2000) // Change every 2 seconds
+      }, 300)
+    }, 2000)
 
     return () => clearInterval(interval)
   }, [phrases.length, hasRotatingPhrases])

@@ -195,7 +195,7 @@ export const CheckoutPage: React.FC = () => {
             <AddressItem
               actions={
                 <Button
-                  variant={'outline'}
+                  variant={'primary'}
                   disabled={Boolean(paymentData)}
                   onClick={(e) => {
                     e.preventDefault()
