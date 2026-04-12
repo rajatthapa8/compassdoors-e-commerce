@@ -12,6 +12,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   media,
   richText,
   rotatingPhrases,
+  image,
 }) => {
   const { setHeaderTheme } = useHeaderTheme()
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0)
@@ -46,6 +47,19 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
     >
       <div className="container mb-8 z-10 relative flex items-center justify-items-start min-h-screen md:min-h-0">
         <div className="max-w-146 md:text-center">
+          <div className="md:hidden select-none w-auto h-auto ">
+            {image && typeof image === 'object' && (
+              <Image
+                src={image.url || ''}
+                height={500}
+                width={500}
+                priority
+                unoptimized
+                className="-z-10"
+                alt={image.alt || ''}
+              />
+            )}
+          </div>
           {richText && !hasRotatingPhrases && (
             <RichText className="mb-6 text-left text-lg" data={richText} enableGutter={false} />
           )}
