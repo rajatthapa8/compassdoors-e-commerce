@@ -7,7 +7,6 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { RichText } from '@/components/RichText'
 import Image from 'next/image'
-
 export const HighImpactHero: React.FC<Page['hero']> = ({
   links,
   media,
@@ -41,8 +40,11 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   }, [phrases.length, hasRotatingPhrases])
 
   return (
-    <div className="flex items-center justify-center text-white" data-theme="dark">
-      <div className="container mb-8 z-10 relative flex items-center justify-items-start">
+    <div
+      className="flex items-center justify-center text-white bg-[#04143E] md:bg-transparent"
+      data-theme="dark"
+    >
+      <div className="container mb-8 z-10 relative flex items-center justify-items-start min-h-screen md:min-h-0">
         <div className="max-w-146 md:text-center">
           {richText && !hasRotatingPhrases && (
             <RichText className="mb-6 text-left text-lg" data={richText} enableGutter={false} />
@@ -50,7 +52,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
           {hasRotatingPhrases && (
             <div className="mb-6 text-left">
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+              <h1 className="text-2xl md:text-5xl font-bold leading-tight">
                 <span className="block mb-2">Beautiful,</span>
                 <span
                   className={`block text-secondary transition-all duration-300 mb-2 ${
@@ -83,7 +85,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
       </div>
-      <div className="min-h-screen select-none">
+      <div className="hidden md:block min-h-screen select-none ">
         {media && typeof media === 'object' && (
           <Image
             src={media.url || ''}

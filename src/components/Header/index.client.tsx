@@ -1,6 +1,4 @@
 'use client'
-import { Cart } from '@/components/Cart'
-import { OpenCartButton } from '@/components/Cart/OpenCart'
 import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -28,19 +26,18 @@ export function HeaderClient({ header, setting }: Props) {
 
   return (
     <div className="relative z-20 bg-[#04143E]">
-      <nav className="flex items-center md:items-end justify-between container pt-2 pl-0 pr-0">
-        <div className="block flex-none md:hidden">
-          <Suspense fallback={null}>
-            <MobileMenu menu={menu} />
-          </Suspense>
-        </div>
+      <nav className="flex items-center md:items-end justify-between container pt-2 pl-0 pr-0 md:border-0 md:border-none border-b border-gray-500">
         <div className="flex w-full items-center justify-between container py-4">
           <div className="flex flex-1 justify-start">
             <Link href="/">
               <LogoIcon logo={setting.Logo as logo | undefined} />
             </Link>
           </div>
-
+          <div className="block flex-none md:hidden">
+            <Suspense fallback={null}>
+              <MobileMenu menu={menu} />
+            </Suspense>
+          </div>
           <div className="hidden md:flex flex-1 justify-center">
             {menu.length ? (
               <ul className="flex items-center gap-6">
@@ -60,12 +57,6 @@ export function HeaderClient({ header, setting }: Props) {
                 ))}
               </ul>
             ) : null}
-          </div>
-
-          <div className="flex flex-1 justify-end items-center gap-4  ">
-            <Suspense fallback={<OpenCartButton />}>
-              <Cart />
-            </Suspense>
           </div>
         </div>
       </nav>

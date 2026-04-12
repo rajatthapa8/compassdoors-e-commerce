@@ -29,7 +29,6 @@ export function CartModal() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Close the cart modal when the pathname changes.
     setIsOpen(false)
   }, [pathname])
 

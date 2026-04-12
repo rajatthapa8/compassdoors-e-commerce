@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-
+import { MdOutlineShoppingCart } from 'react-icons/md'
 export function OpenCartButton({
   className,
   quantity,
@@ -9,11 +9,8 @@ export function OpenCartButton({
   quantity?: number
 }) {
   return (
-    <Button
-      variant="default"
-      className="navLink relative items-end hover:cursor-pointer text-white!"
-      {...rest}
-    >
+    <Button variant="plain" className="navLink relative items-end hover:cursor-pointer" {...rest}>
+      <MdOutlineShoppingCart className="text-lg" />
       <span>Cart</span>
 
       {quantity ? (

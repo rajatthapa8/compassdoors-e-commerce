@@ -16,7 +16,9 @@ import { useAuth } from '@/providers/Auth'
 import { MenuIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import { Cart } from '../Cart'
+import { OpenCartButton } from '../Cart/OpenCart'
 
 interface Props {
   menu: Header['navItems']
@@ -47,8 +49,8 @@ export function MobileMenu({ menu }: Props) {
 
   return (
     <Sheet onOpenChange={setIsOpen} open={isOpen}>
-      <SheetTrigger className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:bg-black dark:text-white">
-        <MenuIcon className="h-4 text-white" />
+      <SheetTrigger className="relative border-none flex h-11 w-11 items-center justify-center rounded-md border border-gray-500 text-black transition-colors">
+        <MenuIcon className="h-10 text-white" />
       </SheetTrigger>
 
       <SheetContent side="left" className="px-4">
@@ -68,6 +70,9 @@ export function MobileMenu({ menu }: Props) {
               ))}
             </ul>
           ) : null}
+          <Suspense fallback={<OpenCartButton />}>
+            <Cart />
+          </Suspense>
         </div>
 
         {user ? (
@@ -95,7 +100,7 @@ export function MobileMenu({ menu }: Props) {
           <div>
             <h2 className="text-xl mb-4">My account</h2>
             <div className="flex items-center gap-2 mt-4">
-              <Button asChild className="w-full" variant="outline">
+              <Button asChild className="w-full" variant="default">
                 <Link href="/login">Log in</Link>
               </Button>
               <span>or</span>
