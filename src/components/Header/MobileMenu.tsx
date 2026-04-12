@@ -90,7 +90,7 @@ export function MobileMenu({ menu }: Props) {
                 <Link href="/account">Manage account</Link>
               </li>
               <li className="mt-6">
-                <Button asChild variant="outline">
+                <Button asChild variant="primary">
                   <Link href="/logout">Log out</Link>
                 </Button>
               </li>

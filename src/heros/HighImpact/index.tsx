@@ -42,10 +42,10 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
   return (
     <div
-      className="flex items-center justify-center text-white bg-[#04143E] md:bg-transparent"
+      className="flex items-center justify-center text-white bg-[#04143E] md:bg-transparent overflow-x-hidden"
       data-theme="dark"
     >
-      <div className="container mb-8 z-10 relative flex items-center justify-items-start min-h-screen md:min-h-0">
+      <div className="container mx-auto px-4 mb-8 z-10 relative flex items-center justify-items-start min-h-screen md:min-h-0">
         <div className="max-w-146 md:text-center">
           <div className="md:hidden select-none w-auto h-auto ">
             {image && typeof image === 'object' && (
